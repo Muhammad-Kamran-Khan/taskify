@@ -9,7 +9,8 @@ const UserContext = createContext();
 axios.defaults.withCredentials = true;
 
 export const UserContextProvider = ({ children }) => {
-    const serverUrl = "https:taskify-backend-omega.vercel.app";
+
+    const serverUrl = "https://taskify-backend-omega.vercel.app";
 
     const navigate = useNavigate();
 
