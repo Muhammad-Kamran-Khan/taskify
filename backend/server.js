@@ -3,12 +3,13 @@ import dotenv from "dotenv";
 import cors from "cors";
 import connect from "./src/db/connect.js";
 import cookieParser from "cookie-parser";
-import fs from "node:fs";
+import tasksRoutes from './src/routes/tasksRoutes.js'
+import userRoutes from './src/routes/userRoutes.js'
 import errorHandler from "./src/helpers/errorhandler.js";
 
 dotenv.config();
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT;
 
 const app = express();
 
@@ -27,18 +28,8 @@ app.use(cookieParser());
 app.use(errorHandler);
 
 //routes
-const routeFiles = fs.readdirSync("./src/routes");
-
-routeFiles.forEach((file) => {
-  // use dynamic import
-  import(`./src/routes/${file}`)
-    .then((route) => {
-      app.use("/api/v1", route.default);
-    })
-    .catch((err) => {
-      console.log("Failed to load route file", err);
-    });
-});
+app.use("/api/v1", tasksRoutes);
+app.use("/api/v1", userRoutes);
 
 const server = async () => {
   try {
