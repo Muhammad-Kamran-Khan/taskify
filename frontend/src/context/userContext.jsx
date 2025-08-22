@@ -10,7 +10,7 @@ axios.defaults.withCredentials = true;
 
 export const UserContextProvider = ({ children }) => {
 
-    const serverUrl = "https://taskify-backend-omega.vercel.app";
+    const serverUrl = import.meta.env.VITE_BACKEND_URL;
 
     const navigate = useNavigate();
 

@@ -5,7 +5,7 @@ import { useUserContext } from "./userContext";
 import toast from "react-hot-toast";
 
 const TasksContext = createContext();
-const serverUrl = "http://localhost:3000/api/v1";
+const serverUrl = import.meta.env.VITE_BACKEND_URL;
 
 export function TasksProvider({ children }) {
   const { user } = useUserContext();
