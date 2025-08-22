@@ -5,7 +5,7 @@ import connect from "./src/db/connect.js";
 import cookieParser from "cookie-parser";
 import tasksRoutes from './src/routes/tasksRoutes.js'
 import userRoutes from './src/routes/userRoutes.js'
-import errorHandler from "./src/helpers/errorhandler.js";
+import errorHandler from "./src/helpers/errorHandler.js";
 
 dotenv.config();
 
