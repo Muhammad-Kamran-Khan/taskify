@@ -41,11 +41,10 @@ export function TasksProvider({ children }) {
     setActiveTask(null);
     setTask({});
   };
-
   const getTasks = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${serverUrl}/tasks`);
+      const res = await axios.get(`${serverUrl}/api/v1/tasks`);
       setTasks(res.data.tasks || []);
     } catch (err) {
       console.error("Error getting tasks", err);
@@ -56,7 +55,7 @@ export function TasksProvider({ children }) {
   const getTask = async (taskId) => {
     setLoading(true);
     try {
-      const res = await axios.get(`${serverUrl}/task/${taskId}`);
+      const res = await axios.get(`${serverUrl}/api/v1/task/${taskId}`);
       setTask(res.data);
     } catch (err) {
       console.error("Error getting task", err);
@@ -67,7 +66,7 @@ export function TasksProvider({ children }) {
   const createTask = async (newTask) => {
     setLoading(true);
     try {
-      const res = await axios.post(`${serverUrl}/task/create`, newTask);
+      const res = await axios.post(`${serverUrl}/api/v1/task/create`, newTask);
       setTasks((prev) => [...prev, res.data]);
       toast.success("Task created successfully");
     } catch (err) {
@@ -79,7 +78,7 @@ export function TasksProvider({ children }) {
   const updateTask = async (updatedTask) => {
     setLoading(true);
     try {
-      const res = await axios.patch(`${serverUrl}/task/${updatedTask._id}`, updatedTask);
+      const res = await axios.patch(`${serverUrl}/api/v1/task/${updatedTask._id}`, updatedTask);
       setTasks((prev) =>
         prev.map((t) => (t._id === res.data._id ? res.data : t))
       );
@@ -93,7 +92,7 @@ export function TasksProvider({ children }) {
   const deleteTask = async (taskId) => {
     setLoading(true);
     try {
-      await axios.delete(`${serverUrl}/task/${taskId}`);
+      await axios.delete(`${serverUrl}/api/v1/task/${taskId}`);
       setTasks((prev) => prev.filter((t) => t._id !== taskId));
     } catch (err) {
       console.error("Error deleting task", err);
